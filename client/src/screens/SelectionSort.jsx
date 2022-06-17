@@ -39,19 +39,6 @@ export default function SelectionSort() {
     }
   };
 
-  const isSorted = (arr1, arr2) => {
-    if (
-      arr1 ===
-      arr2.sort((a, b) => {
-        return a - b;
-      })
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   // const selectionSort = (data) => {
   //   for (let i = 0; i < data.length; i++) {
   //     let lowest = i;
@@ -119,20 +106,15 @@ export default function SelectionSort() {
               }
               console.log(`current: ${data[loop]}, lowest:${data[lowest]}`);
               setWhatJustHappened(
-                `${data[loop]} traded places with ${data[lowest]}`
+                `${data[loop]} checked with all the numbers traded places with ${data[lowest]}`
               );
               let temp = data[loop];
               data[loop] = data[lowest];
               data[lowest] = temp;
               setCheckIfSortedArray(data);
+              console.log(checkIfSortedArray);
               setToggleSort((prevToggle) => !prevToggle);
               setLoop((prevState) => prevState + 1);
-              if (isSorted(data, checkIfSortedArray)) {
-                setDone("hidden");
-                setWhatJustHappened(
-                  `${data[loop]} traded places with ${data[lowest]} and is now sorted!`
-                );
-              }
             }}
           >
             Next
