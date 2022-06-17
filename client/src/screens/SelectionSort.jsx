@@ -107,16 +107,6 @@ export default function SelectionSort() {
               data[lowest] = temp;
               setToggleSort((prevToggle) => !prevToggle);
               setLoop((prevState) => prevState + 1);
-              let finishing = 0;
-              for (let i = 0; i < data.length; i++) {
-                if (data[i] < data[i + 1]) {
-                  finishing++;
-                }
-              }
-              if (finishing === data.length - 1) {
-                console.log("true");
-                setDone("hidden");
-              }
             }}
           >
             Next
