@@ -1,5 +1,8 @@
 import "./App.css";
 import Home from "./screens/Home";
+import SelectionSort from "./screens/SelectionSort";
+import BubbleSort from "./screens/BubbleSort";
+import InsertionSort from "./screens/InsertionSort";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -7,9 +10,9 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Selection%20Sort" element={<h2>selection sort</h2>} />
-        <Route path="/Bubble%20Sort" element={<h2>selection sort</h2>} />
-        <Route path="/Insertion%20Sort" element={<h2>selection sort</h2>} />
+        <Route path="/Selection%20Sort" element={<SelectionSort />} />
+        <Route path="/Bubble%20Sort" element={<BubbleSort />} />
+        <Route path="/Insertion%20Sort" element={<InsertionSort />} />
       </Routes>
     </div>
   );
