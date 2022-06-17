@@ -7,9 +7,11 @@ export default function SelectionSort() {
   const [warning, setWarning] = useState("opacity-0");
   const [confirm, setConfirm] = useState("hidden");
   const [firstButton, setFirstButton] = useState("opacity-1");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([1]);
+  // eslint-disable-next-line
   const [toggleSort, setToggleSort] = useState(false);
   const [loop, setLoop] = useState(0);
+  const [done, setDone] = useState("");
 
   const arr = input.split(",");
 
@@ -90,7 +92,7 @@ export default function SelectionSort() {
             })}
           </div>
           <button
-            className="bg-black text-white p-2 m-4"
+            className={`bg-black text-white p-2 m-4 ${done}`}
             onClick={() => {
               // selectionSort(data);
               let lowest = loop;
@@ -105,9 +107,19 @@ export default function SelectionSort() {
               data[lowest] = temp;
               setToggleSort((prevToggle) => !prevToggle);
               setLoop((prevState) => prevState + 1);
+              let finishing = 0;
+              for (let i = 0; i < data.length; i++) {
+                if (data[i] < data[i + 1]) {
+                  finishing++;
+                }
+              }
+              if (finishing === data.length - 1) {
+                console.log("true");
+                setDone("hidden");
+              }
             }}
           >
-            Sort
+            Next
           </button>
         </>
       )}
