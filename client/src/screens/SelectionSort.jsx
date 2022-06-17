@@ -12,7 +12,6 @@ export default function SelectionSort() {
   const [toggleSort, setToggleSort] = useState(false);
   const [loop, setLoop] = useState(0);
   const [done, setDone] = useState("");
-  const [checkIfSortedArray, setCheckIfSortedArray] = useState([]);
   const [whatJustHappened, setWhatJustHappened] = useState("an unsorted array");
 
   const arr = input.replace(/\s/g, "").split(",");
@@ -38,6 +37,12 @@ export default function SelectionSort() {
       setFirstButton("opacity-1");
     }
   };
+
+  const isArraySorted = (array) =>
+    array
+      .slice(0) // clone array
+      .sort((a, b) => a - b) // sort it
+      .every((el, i) => el === array[i]);
 
   // const selectionSort = (data) => {
   //   for (let i = 0; i < data.length; i++) {
@@ -111,10 +116,14 @@ export default function SelectionSort() {
               let temp = data[loop];
               data[loop] = data[lowest];
               data[lowest] = temp;
-              setCheckIfSortedArray(data);
-              console.log(checkIfSortedArray);
               setToggleSort((prevToggle) => !prevToggle);
               setLoop((prevState) => prevState + 1);
+              if (isArraySorted(data)) {
+                setDone("hidden");
+                setWhatJustHappened(
+                  `${data[loop]} checked with all the numbers traded places with ${data[lowest]} and is now sorted!`
+                );
+              }
             }}
           >
             Next
