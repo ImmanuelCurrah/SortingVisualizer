@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Bar from "../components/Bar";
 
 export default function SelectionSort() {
@@ -8,6 +8,7 @@ export default function SelectionSort() {
   const [confirm, setConfirm] = useState("hidden");
   const [firstButton, setFirstButton] = useState("opacity-1");
   const [data, setData] = useState([]);
+  const [toggleSort, setToggleSort] = useState(false);
 
   const arr = input.split(",");
 
@@ -19,7 +20,6 @@ export default function SelectionSort() {
 
   const createGraph2 = () => {
     setData(arr);
-    console.log(data);
     setDisplayGraph(true);
   };
 
@@ -31,6 +31,21 @@ export default function SelectionSort() {
       setWarning("opacity-0");
       setFirstButton("opacity-1");
     }
+  };
+
+  const selectionSort = (data) => {
+    for (let i = 0; i < data.length; i++) {
+      let lowest = i;
+      for (let j = i + 1; j < data.length; j++) {
+        if (+data[j] < +data[lowest]) {
+          lowest = j;
+        }
+      }
+      let temp = data[i];
+      data[i] = data[lowest];
+      data[lowest] = temp;
+    }
+    setToggleSort((prevToggle) => !prevToggle);
   };
 
   return (
@@ -73,7 +88,14 @@ export default function SelectionSort() {
               );
             })}
           </div>
-          <button className="bg-black text-white p-2 m-4">Sort</button>
+          <button
+            className="bg-black text-white p-2 m-4"
+            onClick={() => {
+              selectionSort(data);
+            }}
+          >
+            Sort
+          </button>
         </>
       )}
     </div>
