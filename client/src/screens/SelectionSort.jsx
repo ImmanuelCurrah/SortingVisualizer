@@ -9,6 +9,7 @@ export default function SelectionSort() {
   const [firstButton, setFirstButton] = useState("opacity-1");
   const [data, setData] = useState([]);
   const [toggleSort, setToggleSort] = useState(false);
+  const [loop, setLoop] = useState(0);
 
   const arr = input.split(",");
 
@@ -33,20 +34,20 @@ export default function SelectionSort() {
     }
   };
 
-  const selectionSort = (data) => {
-    for (let i = 0; i < data.length; i++) {
-      let lowest = i;
-      for (let j = i + 1; j < data.length; j++) {
-        if (+data[j] < +data[lowest]) {
-          lowest = j;
-        }
-      }
-      let temp = data[i];
-      data[i] = data[lowest];
-      data[lowest] = temp;
-    }
-    setToggleSort((prevToggle) => !prevToggle);
-  };
+  // const selectionSort = (data) => {
+  //   for (let i = 0; i < data.length; i++) {
+  //     let lowest = i;
+  //     for (let j = i + 1; j < data.length; j++) {
+  //       if (+data[j] < +data[lowest]) {
+  //         lowest = j;
+  //       }
+  //     }
+  //     let temp = data[i];
+  //     data[i] = data[lowest];
+  //     data[lowest] = temp;
+  //   }
+  //   setToggleSort((prevToggle) => !prevToggle);
+  // };
 
   return (
     <div className="flex flex-col items-center justify-center bg-emerald-500 h-screen">
@@ -91,7 +92,19 @@ export default function SelectionSort() {
           <button
             className="bg-black text-white p-2 m-4"
             onClick={() => {
-              selectionSort(data);
+              // selectionSort(data);
+              let lowest = loop;
+              for (let j = loop + 1; j < data.length; j++) {
+                if (+data[j] < +data[lowest]) {
+                  lowest = j;
+                }
+              }
+              console.log(`i: ${data[loop]}, lowest:${data[lowest]}`);
+              let temp = data[loop];
+              data[loop] = data[lowest];
+              data[lowest] = temp;
+              setToggleSort((prevToggle) => !prevToggle);
+              setLoop((prevState) => prevState + 1);
             }}
           >
             Sort
