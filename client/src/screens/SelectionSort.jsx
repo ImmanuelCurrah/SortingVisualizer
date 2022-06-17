@@ -13,6 +13,7 @@ export default function SelectionSort() {
   const [loop, setLoop] = useState(0);
   const [done, setDone] = useState("");
   const [checkIfSortedArray, setCheckIfSortedArray] = useState([]);
+  const [whatJustHappened, setWhatJustHappened] = useState("an unsorted array");
 
   const arr = input.replace(/\s/g, "").split(",");
 
@@ -106,10 +107,10 @@ export default function SelectionSort() {
               );
             })}
           </div>
+          <p>{whatJustHappened}</p>
           <button
             className={`bg-black text-white p-2 m-4 ${done}`}
             onClick={() => {
-              // selectionSort(data);
               let lowest = loop;
               for (let j = loop + 1; j < data.length; j++) {
                 if (+data[j] < +data[lowest]) {
@@ -117,6 +118,9 @@ export default function SelectionSort() {
                 }
               }
               console.log(`current: ${data[loop]}, lowest:${data[lowest]}`);
+              setWhatJustHappened(
+                `${data[loop]} traded places with ${data[lowest]}`
+              );
               let temp = data[loop];
               data[loop] = data[lowest];
               data[lowest] = temp;
@@ -125,6 +129,9 @@ export default function SelectionSort() {
               setLoop((prevState) => prevState + 1);
               if (isSorted(data, checkIfSortedArray)) {
                 setDone("hidden");
+                setWhatJustHappened(
+                  `${data[loop]} traded places with ${data[lowest]} and is now sorted!`
+                );
               }
             }}
           >
