@@ -12,10 +12,12 @@ export default function SelectionSort() {
   const [toggleSort, setToggleSort] = useState(false);
   const [loop, setLoop] = useState(0);
   const [done, setDone] = useState("");
+  const [checkIfSortedArray, setCheckIfSortedArray] = useState([]);
 
-  const arr = input.split(",");
+  const arr = input.replace(/\s/g, "").split(",");
 
   const createGraph = () => {
+    console.log(arr);
     setData(arr);
     setConfirm("opacity-1");
     setFirstButton("hidden");
@@ -33,6 +35,19 @@ export default function SelectionSort() {
     } else {
       setWarning("opacity-0");
       setFirstButton("opacity-1");
+    }
+  };
+
+  const isSorted = (arr1, arr2) => {
+    if (
+      arr1 ===
+      arr2.sort((a, b) => {
+        return a - b;
+      })
+    ) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -101,12 +116,16 @@ export default function SelectionSort() {
                   lowest = j;
                 }
               }
-              console.log(`i: ${data[loop]}, lowest:${data[lowest]}`);
+              console.log(`current: ${data[loop]}, lowest:${data[lowest]}`);
               let temp = data[loop];
               data[loop] = data[lowest];
               data[lowest] = temp;
+              setCheckIfSortedArray(data);
               setToggleSort((prevToggle) => !prevToggle);
               setLoop((prevState) => prevState + 1);
+              if (isSorted(data, checkIfSortedArray)) {
+                setDone("hidden");
+              }
             }}
           >
             Next
