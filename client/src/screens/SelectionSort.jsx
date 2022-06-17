@@ -13,6 +13,7 @@ export default function SelectionSort() {
   const [loop, setLoop] = useState(0);
   const [done, setDone] = useState("");
   const [whatJustHappened, setWhatJustHappened] = useState("an unsorted array");
+  const [resetButton, setResetButton] = useState("hidden");
 
   const arr = input.replace(/\s/g, "").split(",");
 
@@ -123,10 +124,19 @@ export default function SelectionSort() {
                 setWhatJustHappened(
                   `${data[loop]} checked with all the numbers traded places with ${data[lowest]} and is now sorted!`
                 );
+                setResetButton("");
               }
             }}
           >
             Next
+          </button>
+          <button
+            className={`bg-black text-white p-2 m-4 ${resetButton}`}
+            onClick={() => {
+              window.location.reload(false);
+            }}
+          >
+            Reset
           </button>
         </>
       )}
