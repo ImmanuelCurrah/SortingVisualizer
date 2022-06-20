@@ -12,6 +12,7 @@ export default function BubbleSort() {
   const [toggleSort, setToggleSort] = useState(false);
   const [loop, setLoop] = useState(0);
   const [done, setDone] = useState("");
+  // eslint-disable-next-line
   const [whatJustHappened, setWhatJustHappened] = useState([]);
   const [resetButton, setResetButton] = useState("hidden");
 
